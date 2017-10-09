@@ -94,4 +94,3 @@ if __name__ == '__main__':
     slopeone = SlopeOne()
     slopeone.construct_score_dict()
     slopeone.computeDeviations()
-    pass
