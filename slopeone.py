@@ -10,7 +10,7 @@ class SlopeOne():
         path = '/home/admin-ygb/Desktop/recommender system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
-        self.test = pd.read_csv(path + 'ua.test', sep='\t', names=columns)
+        #self.test = pd.read_csv(path + 'ua.test', sep='\t', names=columns)
         self.frequencies = {}
         self.deviations = {}
         
@@ -35,7 +35,7 @@ class SlopeOne():
         self.train = dic
 
 
-    def computeDeviations(self):
+    def compute_deviations(self):
         """compute the deviation term of train data"""
         
 
@@ -62,7 +62,7 @@ class SlopeOne():
             
     
     #data = get_k_neighbor ,userRatings is the values  ,n is the number of the user , k is the number of the neighbours 
-    def slopeOneRecommendations(self, predict_user):
+    def slopeone_recommendations(self, predict_user):
         """the main process of slope one algorithm"""
         
         recommendations = {}
@@ -93,4 +93,4 @@ class SlopeOne():
 if __name__ == '__main__':
     slopeone = SlopeOne()
     slopeone.construct_score_dict()
-    slopeone.computeDeviations()
+    slopeone.compute_deviations()

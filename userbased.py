@@ -6,10 +6,11 @@
 import pandas as pd
 from math import sqrt
 
-class userbased():
+class UserBased():
 # In[3]:
 
     def __init__(self):
+        
         path = '/home/admin-ygb/Desktop/recommender system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
@@ -60,7 +61,7 @@ class userbased():
         else:
             return (sum_xy - (sum_x * sum_y) / n) / denominator
 
-    def computeNearestNeighbor(self, username, k=100):
+    def compute_nearest_neighbor(self, username, k=100):
         """compute the username's k nearest neighbors"""
         distances = []
         for instance in self.train:
@@ -73,7 +74,7 @@ class userbased():
 
     def userbased(self,predict_user,k):
         result = {}
-        neighbors = self.computeNearestNeighbor(predict_user,k)
+        neighbors = self.compute_nearest_neighbor(predict_user,k)
         #print(neighbors)
         userRating = self.train[predict_user]
         total_similarity = 0
@@ -109,7 +110,7 @@ class userbased():
                 
     
 if __name__ == '__main__':
-    userbased = userbased()
+    userbased = UserBased()
     userbased.construct_score_dict()
     
     
