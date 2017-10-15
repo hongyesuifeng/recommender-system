@@ -72,7 +72,7 @@ class UserBased():
         distances.sort(key=lambda artistTuple: artistTuple[1],reverse=True)
         return distances[0:k]
 
-    def userbased(self,predict_user,k):
+    def predict(self,predict_user,k):
         """userbased algorithm predict_user is the user you want
            to predict, k is the number of the user neighbors"""
         result = {}
@@ -109,6 +109,45 @@ class UserBased():
         result.sort(key=lambda x: x[1],reverse=True)
         result = [(each[0],each[1]+average_score) for each in result]
         return result
+
+    def predict_top10(self,predict_user,k):
+        """userbased algorithm predict_user is the user you want
+           to predict, k is the number of the user neighbors"""
+        result = {}
+        neighbors = self.compute_nearest_neighbor(predict_user,k)
+        #print(neighbors)
+        userRating = self.train[predict_user]
+        total_similarity = 0
+        total_score = 0
+        for key in self.train[predict_user].keys():
+            total_score += self.train[predict_user][key]
+        average_score = total_score / len(self.train[predict_user])
+        for i in range(k):
+            total_similarity += abs(neighbors[i][1])
+        for i in range(k):
+            weight = neighbors[i][1] / total_similarity
+            name = neighbors[i][0]
+            neighborsRatings = self.train[name]
+            #print("this is the neighborsRatings:", neighborsRatings)
+            neighborsRatings_total_score = 0
+            for key in neighborsRatings.keys():
+                neighborsRatings_total_score += neighborsRatings[key]
+            neighborsRatings_average_score = neighborsRatings_total_score / len(neighborsRatings)
+            #print("this is neighbor_average:", neighborsRatings_average_score)
+            #print("this is the neighbors: ",name)
+            for each in neighborsRatings:
+                #print("this is the item in every neighbors: ",each)
+                if each not in userRating:
+                    #print("gogo")
+                    if each not in result:
+                        result[each] = (neighborsRatings[each]- neighborsRatings_average_score)* weight
+                    else:
+                        result[each] = result[each] + (neighborsRatings[each] - neighborsRatings_average_score) * weight
+        result = list(result.items())
+        result.sort(key=lambda x: x[1],reverse=True)
+        result = [(each[0],each[1]+average_score) for each in result]
+        return result[:10]
+
                 
     
 if __name__ == '__main__':

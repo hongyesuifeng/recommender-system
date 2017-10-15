@@ -37,7 +37,7 @@ class ItemBased():
             dic[key] = m 
         self.train = dic
 
-    def itembased(self,predict_user):
+    def predict(self,predict_user):
         """this is the itembased algorithm, predict_user is the 
            user you want to predict"""
         result = {}
@@ -55,6 +55,26 @@ class ItemBased():
         result = list(result.items())
         result.sort(key=lambda x: x[1],reverse=True)
         return result
+
+    def predict_top10(self,predict_user):
+        """this is the itembased algorithm, predict_user is the 
+           user you want to predict"""
+        result = {}
+        userRating = self.train[predict_user]
+        for pre_item in self.whole_item:
+            if str(pre_item) not in userRating:
+                total_similarity = 0
+                for exist_item in userRating:
+                    total_similarity += self.item_similarity[pre_item-1][int(exist_item)-1]
+                for exist_item in userRating:
+                    if pre_item not in result:
+                        result[pre_item] = self.item_similarity[pre_item-1][int(exist_item)-1] / total_similarity                        * userRating[exist_item]
+                    else:
+                        result[pre_item] = result[pre_item] + self.item_similarity[pre_item-1][int(exist_item)-1]                         / total_similarity * userRating[exist_item]
+        result = list(result.items())
+        result.sort(key=lambda x: x[1],reverse=True)
+        return result[:10]
+
                 
 if __name__ == '__main__':
     itembased = ItemBased()

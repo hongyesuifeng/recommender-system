@@ -5,6 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 class SVD():
+    
+    
     def __init__(self):
         """read train and test and Initialize parameters"""    
         
@@ -74,7 +76,6 @@ class SVD():
             dic[key] = m 
         self.train = dic
 
-    
     def predict(self,predict_user):
         """this is the predict function,predict_user is the 
            user you want to predict"""
@@ -88,6 +89,21 @@ class SVD():
         result = list(result.items())
         result.sort(key=lambda x: x[1],reverse=True)
         return result
+
+    def predict_top10(self,predict_user):
+        """this is the predict function,predict_user is the 
+           user you want to predict"""
+        result = {}
+        userRating = self.train[predict_user]
+        for pre_item in self.whole_item:
+            if str(pre_item) not in userRating:
+                result[str(pre_item)] = self.global_mean + \
+                      + self.bu[int(predict_user)-1] + self.bi[int(pre_item)-1] +\
+                           np.dot(self.qi[int(pre_item)-1],self.pu[int(predict_user)-1])
+        result = list(result.items())
+        result.sort(key=lambda x: x[1],reverse=True)
+        return result[:10]
+
         
         
 if __name__ == '__main__':
