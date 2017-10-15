@@ -38,6 +38,8 @@ class ItemBased():
         self.train = dic
 
     def itembased(self,predict_user):
+        """this is the itembased algorithm, predict_user is the 
+           user you want to predict"""
         result = {}
         userRating = self.train[predict_user]
         for pre_item in self.whole_item:

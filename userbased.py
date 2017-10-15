@@ -73,6 +73,8 @@ class UserBased():
         return distances[0:k]
 
     def userbased(self,predict_user,k):
+        """userbased algorithm predict_user is the user you want
+           to predict, k is the number of the user neighbors"""
         result = {}
         neighbors = self.compute_nearest_neighbor(predict_user,k)
         #print(neighbors)
