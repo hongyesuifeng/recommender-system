@@ -19,7 +19,7 @@ class SVDPP():
         self.mean = 0
         self.std_dev = 0.1
         self.n_factors = 15
-        self.n_epochs = 5
+        self.n_epochs = 1
         self.biased = True
         
         self.bu = np.zeros(self.n_users, np.double)
@@ -68,7 +68,7 @@ class SVDPP():
                     qif = self.qi[i, f]
                     self.pu[u, f] += self.Gamma * (err * qif - self.Lambda2 * puf)
                     self.qi[i, f] += self.Gamma * (err * (puf + self.impl_fdb[f]) - self.Lambda2 * qif)
-                    for i in self.trainset[str(u+1)].keys():
+                    for j in self.trainset[str(u+1)].keys():
                         self.yj[int(j)-1,f] += self.Gamma * (err * qif / sqrt_u - self.Lambda2 * self.yj[int(j)-1,f])
                         
     def construct_score_dict(self):
@@ -93,12 +93,12 @@ class SVDPP():
         """this is the predict function,predict_user is the 
            user you want to predict"""
         result = {}
-        userRating = self.train[predict_user]
+        userRating = self.trainset[predict_user]
         for pre_item in self.whole_item:
             if str(pre_item) not in userRating:
                 result[str(pre_item)] = self.global_mean + \
                       + self.bu[int(predict_user)-1] + self.bi[int(pre_item)-1] +\
-                           np.dot(self.qi[int(pre_item)-1],self.pu[int(predict_user)-1])
+                           np.dot(self.qi[int(pre_item)-1],(self.pu[int(predict_user)-1]+self.yj[int(pre_item)-1]))
         result = list(result.items())
         result.sort(key=lambda x: x[1],reverse=True)
         return result
@@ -107,12 +107,12 @@ class SVDPP():
         """this is the predict function,predict_user is the 
            user you want to predict"""
         result = {}
-        userRating = self.train[predict_user]
+        userRating = self.trainset[predict_user]
         for pre_item in self.whole_item:
             if str(pre_item) not in userRating:
                 result[str(pre_item)] = self.global_mean + \
                       + self.bu[int(predict_user)-1] + self.bi[int(pre_item)-1] +\
-                           np.dot(self.qi[int(pre_item)-1],self.pu[int(predict_user)-1])
+                           np.dot(self.qi[int(pre_item)-1],(self.pu[int(predict_user)-1]+self.yj[int(pre_item)-1]))
         result = list(result.items())
         result.sort(key=lambda x: x[1],reverse=True)
         return result[:10]
