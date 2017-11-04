@@ -6,21 +6,21 @@ import pandas as pd
 class SVD():
     
     
-    def __init__(self):
+    def __init__(self,n_users=943,n_items=1682,mean=0,std_dev=0.1,n_factors=100,n_epochs=10,biased=True,Gamma=0.005,Lambda=0.02):
         """read train and test and Initialize parameters"""    
         
         path = '/home/admin-ygb/Desktop/recommender system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
-        self.n_users = 943
-        self.n_items = 1682
+        self.n_users = n_users
+        self.n_items = n_items
         self.whole_item = self.train.item_id.unique()
         
-        self.mean = 0
-        self.std_dev = 0.1
-        self.n_factors = 100
-        self.n_epochs = 10
-        self.biased = True
+        self.mean = mean
+        self.std_dev = std_dev
+        self.n_factors = n_factors
+        self.n_epochs = n_epochs
+        self.biased = biased 
         
         self.bu = np.zeros(self.n_users, np.double)
         self.bi = np.zeros(self.n_items, np.double)
@@ -28,8 +28,8 @@ class SVD():
         self.qi = np.random.normal(self.mean, self.std_dev,(self.n_items, self.n_factors))
         self.global_mean = self.train.rating.mean()
         
-        self.Gamma = 0.005
-        self.Lambda =0.02
+        self.Gamma = Gamma
+        self.Lambda = Lambda
 
     def svd(self):
         for current_epoch in range(self.n_epochs):

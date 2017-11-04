@@ -6,12 +6,12 @@ from sklearn.metrics.pairwise import pairwise_distances
 class ItemBased():
     
     
-    def __init__(self):
+    def __init__(self,n_users=943,n_items=1682):
         path = '/home/admin-ygb/Desktop/recommender system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
-        self.n_users = 943
-        self.n_items = 1682
+        self.n_users = n_users
+        self.n_items = n_items
         self.train_matrix = np.zeros((self.n_users, self.n_items))
         self.whole_item = self.train.item_id.unique()
         for each in self.train.itertuples():

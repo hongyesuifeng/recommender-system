@@ -6,21 +6,21 @@ import pandas as pd
 class SVDPP():
     
     
-    def __init__(self):
+    def __init__(self,n_users=943,n_items=1682,mean=0,std_dev=0.1,n_factors=15,n_epochs=1,biased=True,Gamma=0.005,Lambda=0.02,Lambda=0.015,trainset=0):
         """read train and test and Initialize parameters"""    
         
         path = '/home/admin-ygb/Desktop/recommender system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
-        self.n_users = 943
-        self.n_items = 1682
+        self.n_users = n_users
+        self.n_items = n_items
         self.whole_item = self.train.item_id.unique()
         
-        self.mean = 0
-        self.std_dev = 0.1
-        self.n_factors = 15
-        self.n_epochs = 1
-        self.biased = True
+        self.mean = mean
+        self.std_dev = std_dev
+        self.n_factors = n_factors
+        self.n_epochs = n_epochs
+        self.biased = biased
         
         self.bu = np.zeros(self.n_users, np.double)
         self.bi = np.zeros(self.n_items, np.double)
@@ -30,10 +30,10 @@ class SVDPP():
         self.yj = np.random.normal(self.mean, self.std_dev,(self.n_items, self.n_factors))
         self.impl_fdb = np.zeros(self.n_factors, np.double)   
         
-        self.Gamma = 0.005
-        self.Lambda1 = 0.02
-        self.Lambda2 = 0.015
-        self.trainset = 0
+        self.Gamma = Gamma
+        self.Lambda1 = Lambda1
+        self.Lambda2 = Lambda2
+        self.trainset = trainset
         self.construct_score_dict()
 
     def svdpp(self):
