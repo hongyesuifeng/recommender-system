@@ -11,7 +11,7 @@ class UserBased():
 
     def __init__(self):
         
-        path = '/home/admin-ygb/Desktop/recommender system/data/'
+        path = '/home/admin-ygb/Desktop/recommender-system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
         #self.test = pd.read_csv('/home/admin-ygb/Desktop/recommender system/data/ua.test',sep='\t',names=names)

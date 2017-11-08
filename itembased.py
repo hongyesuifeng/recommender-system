@@ -7,7 +7,7 @@ class ItemBased():
     
     
     def __init__(self,n_users=943,n_items=1682):
-        path = '/home/admin-ygb/Desktop/recommender system/data/'
+        path = '/home/admin-ygb/Desktop/recommender-system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
         self.n_users = n_users

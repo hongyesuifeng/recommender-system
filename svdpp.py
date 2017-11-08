@@ -6,10 +6,10 @@ import pandas as pd
 class SVDPP():
     
     
-    def __init__(self,n_users=943,n_items=1682,mean=0,std_dev=0.1,n_factors=15,n_epochs=1,biased=True,Gamma=0.005,Lambda=0.02,Lambda=0.015,trainset=0):
+    def __init__(self,n_users=943,n_items=1682,mean=0,std_dev=0.1,n_factors=15,n_epochs=1,biased=True,Gamma=0.005,Lambda1=0.02,Lambda2=0.015,trainset=0):
         """read train and test and Initialize parameters"""    
         
-        path = '/home/admin-ygb/Desktop/recommender system/data/'
+        path = '/home/admin-ygb/Desktop/recommender-system/data/'
         columns = ['user_id', 'item_id', 'rating', 'timestamp']
         self.train = pd.read_csv(path + 'ua.base', sep='\t', names=columns)
         self.n_users = n_users
