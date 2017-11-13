@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset="UTF-8">
+	{% load static %}
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{% static 'recommender/cssResset.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'recommender/index.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'recommender/common.css' %}" />
+</head>
+<body>
+
+	<!-- Start 页面的顶部-->
+	<div class="top">
+		<div class="top_page">
+			<div class="top_page_l">{{title1}}</div>
+		</div>
+	</div>
+	<!-- End 页面的顶部-->
+
+	<div class="nav">
+		<ul>
+  	       <li>
+  	       <form action={% url "us" %} method="POST" class="five_button">{% csrf_token %}
+               <input value={{UserBased}} type="submit">
+           </form>
+           </li>
+           <li>
+ 	       <form action={% url "it" %} method="POST" class="five_button">{% csrf_token %}
+               <input value={{ItemBased}} type="submit">
+           </form>
+           </li>
+           <li>
+ 	        <form action={% url "sl" %} method="POST" class="five_button">{% csrf_token %}
+               <input value={{SlopeOne}} type="submit">
+           </form>
+           </li>
+           <li>
+ 	       <form action={% url "sv" %} method="POST" class="five_button">{% csrf_token %}
+               <input value={{SVD}} type="submit">
+           </form>
+           </li>
+           <li>
+ 	        <form action={% url "svp" %} method="POST" class="five_button">{% csrf_token %}
+               <input value={{SVDPP}} type="submit">
+           </form>
+           </li>
+		</ul>
+	</div>
+	
+	<div class="yuce">
+		<div class="yucelabel">{{title21}}</div>
+		<div class="yuceform">
+			<form action="#" method="get">
+				<input type="text" value="" class ="yuceinput" />
+			</form>
+		</div>
+		    <form action={% url "svp" %} method="POST" class="yucebutton">{% csrf_token %}
+               <input value={{predict}} type="submit">
+           </form>
+	</div>
+	
+	<div class="output">
+		<textarea rows="10" cols="80" class="outputarea">{{title22}}</textarea>
+	</div>
+	<div class="yuce1">
+		<div class="yucelabel">{{title31}}</div>
+        <form action={% url "svp" %} method="POST" class="yucebutton">{% csrf_token %}
+               <input value={{MAE}} type="submit">
+        </form>
+        </div>
+	<div class="outputMAE">
+    	<textarea rows="2" cols="30" class="outputarea">{{title22}}</textarea>
+    </div>
+	
+</body>
+</html>

@@ -1,0 +1,115 @@
+@charset "utf-8";
+html{
+	font: 12px '宋体';
+}
+
+.top{
+	background-color: #F7F7F7;
+	height: 85px;
+	border-bottom: 1px solid #D8D8D8;
+}
+.top_page{
+	width: 1000px;
+	height:  100px; 
+	margin: 0 auto;
+}
+.top_page_l{
+	line-height: 100px;
+	font-size: 80px;
+	text-align: center;
+}
+
+
+.nav{
+	width: 1000px;
+	height: 50px;
+	margin: 0 auto;
+}
+.nav li{
+	padding:0 50px 0 50px;
+	float: left;
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.nav li a{
+	color: #0266A3;
+}
+.nav li:hover{
+	background-color: #0266A3;
+	color: #0266A3;
+}
+.nav li:hover a{
+	color: snow;
+}
+
+.five_button{
+	height: 40px;
+	width: 100px;
+	margin: 0 auto;
+	font-size: 20px;
+}
+
+
+.yuce{
+	width: 1000px;
+	height: 130px;
+	margin: 0 auto;
+}
+
+.yuce1{
+	width: 1000px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.yucelabel{
+	height : 50px;
+	font-size : 30px;
+	text-align: center;
+	margin: 0 auto;
+}
+.yuceform{
+	height :30px;
+	width : 400px;
+	margin: 0 auto;
+}
+.yuceinput{
+	height :30px;
+	width : 400px;
+	background-color: red;
+	margin: 0 auto;
+}
+
+.yucebutton{
+	height: 200px;
+	width : 100px;
+	margin: 0 auto;
+	font-size: 20px;
+	text-align:center;
+}
+
+.yucebutton1{
+	height: 20px;
+	width : 100px;
+	margin: 0 auto;
+}
+
+.output{
+	height: 220px;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align:center;
+}
+
+.outputarea{
+	margin: 0 auto;
+}
+
+.outputMAE{
+	height: 0px;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align:center;
+	margin: 0 auto;
+}
